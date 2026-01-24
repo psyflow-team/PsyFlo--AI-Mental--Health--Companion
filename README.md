@@ -1,4 +1,4 @@
-# PsyfFlo - AI Mental Health Companion
+# PsyFlo - AI Mental Health Companion
 
 An intelligent mental health companion app that provides 24/7 accessible wellness support through AI-driven mood tracking, personalized recommendations, and privacy-first design.
 
@@ -6,7 +6,7 @@ An intelligent mental health companion app that provides 24/7 accessible wellnes
 Making mental health support affordable, accessible, and stigma-free for everyone—especially students and young professionals navigating stress, anxiety, and mental wellness challenges.
 
 ## 💡 Problem We're Solving
-Mental health support is critical, yet many people lack access to affordable, accessible resources. Barriers include high costs, limited professional availability, stigma, and timing gaps when crises occur outside business hours. **Psyflow** democratizes mental wellness by providing intelligent, personalized support anytime, anywhere.
+Mental health support is critical, yet many people lack access to affordable, accessible resources. Barriers include high costs, limited professional availability, stigma, and timing gaps when crises occur outside business hours. **Psyflo** democratizes mental wellness by providing intelligent, personalized support anytime, anywhere.
 
 ## ✨ Features
 - 📊 AI-powered mood tracking with pattern analysis
