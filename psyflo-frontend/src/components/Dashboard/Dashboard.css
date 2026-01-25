@@ -1,0 +1,373 @@
+/* Mood Tracker Card */
+.mood-tracker-card,
+.mood-history-card,
+.trends-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1a3a4a;
+  margin: 0 0 1.25rem 0;
+}
+
+.success-message {
+  background: #d4f4e0;
+  color: #065f46;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.mood-slider-container {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.mood-value {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+  transition: color 0.3s ease;
+}
+
+.mood-label {
+  font-size: 1rem;
+  color: #5a7a8a;
+  margin: 0.5rem 0 1.5rem 0;
+}
+
+.mood-slider {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  appearance: none;
+  background: #e5e7eb;
+  outline: none;
+}
+
+.mood-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--slider-color, #4a9bb0);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.mood-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+.mood-scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.mood-note {
+  margin-top: 1.5rem;
+}
+
+.mood-note label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #1a3a4a;
+  margin-bottom: 0.5rem;
+}
+
+.mood-note textarea {
+  width: 100%;
+  padding: 0.875rem;
+  border: 1.5px solid #d0e0e8;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  resize: none;
+  font-family: inherit;
+  background: #f8fbfc;
+  transition: all 0.2s ease;
+}
+
+.mood-note textarea:focus {
+  outline: none;
+  border-color: #4a9bb0;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(74, 155, 176, 0.1);
+}
+
+.log-mood-button {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+  background: linear-gradient(135deg, #4a9bb0 0%, #3a8a9f 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.log-mood-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(74, 155, 176, 0.3);
+}
+
+.log-mood-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Mood History */
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: #5a7a8a;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  background: #f8fbfc;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+
+.history-item:hover {
+  background: #f0f5f7;
+}
+
+.mood-indicator {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.history-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.history-date {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #1a3a4a;
+}
+
+.history-note {
+  font-size: 0.85rem;
+  color: #5a7a8a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.delete-entry {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.history-item:hover .delete-entry {
+  opacity: 0.5;
+}
+
+.delete-entry:hover {
+  opacity: 1 !important;
+}
+
+.delete-entry svg {
+  width: 18px;
+  height: 18px;
+  color: #ef4444;
+}
+
+/* Trends Card */
+.trends-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.trends-header .card-title {
+  margin-bottom: 0;
+}
+
+.time-toggle {
+  display: flex;
+  gap: 0.25rem;
+  background: #f0f5f7;
+  border-radius: 8px;
+  padding: 0.25rem;
+}
+
+.time-toggle button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #5a7a8a;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.time-toggle button.active {
+  background: white;
+  color: #1a3a4a;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 1rem;
+  background: #f8fbfc;
+  border-radius: 10px;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a3a4a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #5a7a8a;
+  margin-top: 0.25rem;
+}
+
+.trend-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.trend-icon.up {
+  color: #10b981;
+}
+
+.trend-icon.down {
+  color: #ef4444;
+}
+
+.trend-icon.stable {
+  color: #f59e0b;
+}
+
+.trend-text {
+  font-size: 1rem;
+}
+
+.trend-text.improving {
+  color: #10b981;
+}
+
+.trend-text.declining {
+  color: #ef4444;
+}
+
+.trend-text.stable {
+  color: #f59e0b;
+}
+
+/* Chart */
+.chart-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chart-y-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  padding: 0.5rem 0;
+}
+
+.chart-area {
+  flex: 1;
+  overflow-x: auto;
+}
+
+.mood-chart {
+  width: 100%;
+  height: 150px;
+  min-width: 280px;
+}
+
+.data-point {
+  transition: r 0.2s ease;
+}
+
+.data-point:hover {
+  r: 6;
+}
+
+.chart-x-axis {
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.7rem;
+  color: #9ca3af;
+  margin-top: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .stats-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+  }
+  
+  .stat-label {
+    margin-top: 0;
+  }
+}
