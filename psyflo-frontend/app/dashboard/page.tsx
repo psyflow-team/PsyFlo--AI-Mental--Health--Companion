@@ -24,14 +24,16 @@ interface AIResponse {
 }
 
 export default function DashboardPage() {
-  const { isAuthenticated, user, isLoading } = useAuth()
-  const { moods, latestMood, getAverageMood } = useMood()
+  const { isAuthenticated, user, isLoading: authLoading } = useAuth()
+  const { moods, latestMood, getAverageMood, isLoading: moodsLoading, generateSampleData } = useMood()
   const router = useRouter()
   
   const [aiSuggestions, setAiSuggestions] = useState<AIRecommendation[]>([])
   const [aiInsight, setAiInsight] = useState<string>("")
   const [isLoadingAI, setIsLoadingAI] = useState(false)
   const [lastFetchedMoodId, setLastFetchedMoodId] = useState<string | null>(null)
+  const [isGeneratingSample, setIsGeneratingSample] = useState(false)
+  const isLoading = moodsLoading || authLoading; // Declare isLoading variable
 
   // Fetch AI recommendations
   const fetchAIRecommendations = useCallback(async () => {
@@ -64,7 +66,7 @@ export default function DashboardPage() {
 
   // Fetch AI recommendations when component mounts or when a NEW mood is logged
   useEffect(() => {
-    if (!isAuthenticated || isLoading) return
+    if (!isAuthenticated || authLoading || moodsLoading) return
     
     // Check if we have a new mood that we haven't fetched for yet
     if (latestMood && latestMood.id !== lastFetchedMoodId) {
@@ -75,15 +77,22 @@ export default function DashboardPage() {
       setLastFetchedMoodId(moods[moods.length - 1]?.id || null)
       fetchAIRecommendations()
     }
-  }, [isAuthenticated, isLoading, latestMood, lastFetchedMoodId, moods, fetchAIRecommendations])
+  }, [isAuthenticated, authLoading, moodsLoading, latestMood, lastFetchedMoodId, moods, fetchAIRecommendations])
 
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
+    if (!authLoading && !isAuthenticated) {
       router.push("/login")
     }
-  }, [isAuthenticated, isLoading, router])
+  }, [isAuthenticated, authLoading, router])
 
-  if (isLoading || !isAuthenticated) {
+  // Handle generating sample data for new users
+  const handleGenerateSampleData = async () => {
+    setIsGeneratingSample(true)
+    await generateSampleData()
+    setIsGeneratingSample(false)
+  }
+
+  if (authLoading || moodsLoading || !isAuthenticated) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="animate-pulse text-muted-foreground">Loading...</div>
@@ -117,6 +126,28 @@ export default function DashboardPage() {
             {`Here's an overview of your mental wellness journey`}
           </p>
         </div>
+
+        {/* Show prompt if no moods exist */}
+        {moods.length === 0 && (
+          <Card className="mb-6 border-blue-500/20 bg-gradient-to-br from-blue-500/5 to-purple-500/5">
+            <CardContent className="flex flex-col md:flex-row items-center justify-between gap-4 p-6">
+              <div>
+                <h3 className="font-semibold text-foreground">Welcome to PsyFlo!</h3>
+                <p className="text-sm text-muted-foreground">
+                  Start by logging your first mood, or load sample data to explore the app.
+                </p>
+              </div>
+              <Button 
+                onClick={handleGenerateSampleData} 
+                disabled={isGeneratingSample}
+                variant="outline"
+                className="shrink-0 bg-transparent"
+              >
+                {isGeneratingSample ? "Generating..." : "Load Sample Data"}
+              </Button>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Dashboard Grid */}
         <div className="grid lg:grid-cols-3 gap-6">

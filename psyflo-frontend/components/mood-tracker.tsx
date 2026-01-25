@@ -74,8 +74,8 @@ export function MoodTracker() {
       })
     }
     
-    // Add mood after AI analysis starts
-    addMood(selectedMood, note)
+    // Add mood after AI analysis starts (now async with Firestore)
+    await addMood(selectedMood, note)
     
     setIsAnalyzing(false)
     setIsSubmitted(true)

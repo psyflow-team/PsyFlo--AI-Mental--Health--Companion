@@ -34,16 +34,16 @@ export default function SignupPage() {
       return
     }
 
-    if (password.length < 8) {
-      setError("Password must be at least 8 characters")
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters")
       return
     }
 
-    try {
-      await signup(email, password, name)
+    const result = await signup(email, password, name)
+    if (result.success) {
       router.push("/dashboard")
-    } catch {
-      setError("Something went wrong. Please try again.")
+    } else {
+      setError(result.error || "Something went wrong. Please try again.")
     }
   }
 

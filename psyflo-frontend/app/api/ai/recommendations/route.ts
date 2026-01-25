@@ -72,7 +72,7 @@ Be empathetic, supportive, and focus on practical, evidence-based wellness pract
 
     if (!response.ok) {
       console.error("[v0] AI API error:", response.status, response.statusText)
-      // Return fallback recommendations if AI fails
+     
       return NextResponse.json(getFallbackRecommendations(avgMood))
     }
 
@@ -84,7 +84,7 @@ Be empathetic, supportive, and focus on practical, evidence-based wellness pract
       return NextResponse.json(getFallbackRecommendations(avgMood))
     }
 
-    // Parse JSON from response (handle potential markdown wrapping)
+
     let parsed
     try {
       const jsonMatch = content.match(/\{[\s\S]*\}/)
