@@ -11,9 +11,11 @@ export interface MoodEntry {
 
 interface MoodContextType {
   moods: MoodEntry[]
+  latestMood: MoodEntry | null
   addMood: (value: number, note?: string) => void
   getMoodTrend: () => "improving" | "stable" | "declining"
   getAverageMood: (days?: number) => number
+  getTodaysMood: () => MoodEntry | null
 }
 
 const MoodContext = createContext<MoodContextType | undefined>(undefined)
@@ -45,6 +47,7 @@ function generateMockMoods(): MoodEntry[] {
 
 export function MoodProvider({ children }: { children: ReactNode }) {
   const [moods, setMoods] = useState<MoodEntry[]>(generateMockMoods)
+  const [latestMood, setLatestMood] = useState<MoodEntry | null>(null)
 
   const addMood = useCallback((value: number, note = "") => {
     const newMood: MoodEntry = {
@@ -53,6 +56,7 @@ export function MoodProvider({ children }: { children: ReactNode }) {
       note,
       createdAt: new Date().toISOString(),
     }
+    setLatestMood(newMood)
     setMoods((prev) => [...prev, newMood])
   }, [])
 
@@ -76,8 +80,14 @@ export function MoodProvider({ children }: { children: ReactNode }) {
     return recentMoods.reduce((sum, m) => sum + m.value, 0) / recentMoods.length
   }, [moods])
 
+  const getTodaysMood = useCallback((): MoodEntry | null => {
+    const today = new Date().toDateString()
+    const todaysMoods = moods.filter(m => new Date(m.createdAt).toDateString() === today)
+    return todaysMoods.length > 0 ? todaysMoods[todaysMoods.length - 1] : null
+  }, [moods])
+
   return (
-    <MoodContext.Provider value={{ moods, addMood, getMoodTrend, getAverageMood }}>
+    <MoodContext.Provider value={{ moods, latestMood, addMood, getMoodTrend, getAverageMood, getTodaysMood }}>
       {children}
     </MoodContext.Provider>
   )
