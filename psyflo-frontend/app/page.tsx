@@ -8,8 +8,20 @@ import { useEffect } from "react"
 
 const features = [
   {
-    title: "Daily Mood Tracking",
-    description: "Log your emotions with a simple, intuitive interface and track patterns over time.",
+    title: "AI Mood Analysis",
+    description: "Our AI analyzes your mood entries and journal notes to detect emotional patterns and provide supportive insights.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+        <path d="M2 17l10 5 10-5" />
+        <path d="M2 12l10 5 10-5" />
+      </svg>
+    ),
+    isAI: true,
+  },
+  {
+    title: "Smart Recommendations",
+    description: "Get AI-generated wellness activities personalized to your current emotional state and historical patterns.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="10" />
@@ -18,37 +30,31 @@ const features = [
         <line x1="15" y1="9" x2="15.01" y2="9" />
       </svg>
     ),
+    isAI: true,
   },
   {
-    title: "AI Recommendations",
-    description: "Get personalized wellness suggestions based on your mood and patterns.",
+    title: "Sentiment Analysis",
+    description: "Write journal entries and receive empathetic AI feedback that understands your emotions.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2L2 7l10 5 10-5-10-5z" />
-        <path d="M2 17l10 5 10-5" />
-        <path d="M2 12l10 5 10-5" />
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <line x1="16" y1="13" x2="8" y2="13" />
+        <line x1="16" y1="17" x2="8" y2="17" />
       </svg>
     ),
+    isAI: true,
   },
   {
     title: "Guided Exercises",
-    description: "Access breathing techniques, meditations, and stress management activities.",
+    description: "Access breathing techniques, meditations, and evidence-based stress management activities.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
         <path d="M13.73 21a2 2 0 0 1-3.46 0" />
       </svg>
     ),
-  },
-  {
-    title: "Private & Secure",
-    description: "Your data is encrypted and stored securely. Your privacy is our priority.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-      </svg>
-    ),
+    isAI: false,
   },
 ]
 
@@ -98,18 +104,17 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="py-20 md:py-32">
         <div className="container mx-auto px-4 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-secondary px-4 py-1.5 text-sm text-secondary-foreground mb-6">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
-            </span>
-            Your 24/7 wellness companion
+          <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 px-4 py-1.5 text-sm text-blue-600 dark:text-blue-400 mb-6">
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+            </svg>
+            Powered by AI
           </div>
           <h1 className="text-4xl md:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight text-balance">
-            Your mental wellness journey starts here
+            Your AI Mental Health Companion
           </h1>
           <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
-            Psyflo is an AI-powered companion that helps you track your mood, understand your patterns, and discover personalized wellness recommendations.
+            Psyflo uses advanced AI to analyze your mood patterns, provide personalized insights, and recommend evidence-based wellness activities tailored just for you.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/signup">
@@ -141,10 +146,28 @@ export default function LandingPage() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="bg-card rounded-xl p-6 border border-border/50 shadow-sm hover:shadow-md transition-shadow"
+                className={`bg-card rounded-xl p-6 border shadow-sm hover:shadow-md transition-shadow ${
+                  feature.isAI 
+                    ? "border-blue-500/20 bg-gradient-to-br from-blue-500/5 to-purple-500/5" 
+                    : "border-border/50"
+                }`}
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary mb-4">
-                  {feature.icon}
+                <div className="flex items-start justify-between mb-4">
+                  <div className={`flex h-12 w-12 items-center justify-center rounded-lg ${
+                    feature.isAI 
+                      ? "bg-gradient-to-br from-blue-500/20 to-purple-500/20 text-blue-600 dark:text-blue-400" 
+                      : "bg-primary/10 text-primary"
+                  }`}>
+                    {feature.icon}
+                  </div>
+                  {feature.isAI && (
+                    <span className="inline-flex items-center gap-1 text-xs bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded-full border border-blue-500/20">
+                      <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                      </svg>
+                      AI
+                    </span>
+                  )}
                 </div>
                 <h3 className="text-lg font-semibold text-card-foreground mb-2">
                   {feature.title}
