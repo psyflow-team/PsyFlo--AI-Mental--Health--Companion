@@ -96,7 +96,7 @@ export function MoodTracker() {
       <CardHeader>
         <div className="flex items-center gap-2">
           <CardTitle>How are you feeling?</CardTitle>
-          <span className="inline-flex items-center gap-1 text-xs bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded-full border border-blue-500/20">
+          <span className="inline-flex items-center gap-1 text-xs bg-linear-to-r from-blue-500/10 to-purple-500/10 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded-full border border-blue-500/20">
             <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
             </svg>
@@ -126,7 +126,7 @@ export function MoodTracker() {
             
             {/* AI Analysis Response */}
             {aiAnalysis && (
-              <div className="mt-4 p-4 rounded-lg bg-gradient-to-br from-blue-500/5 to-purple-500/5 border border-blue-500/20 text-left">
+              <div className="mt-4 p-4 rounded-lg bg-linear-to-br from-blue-500/5 to-purple-500/5 border border-blue-500/20 text-left">
                 <div className="flex items-center gap-2 mb-2">
                   <svg className="w-4 h-4 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
